@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = new Router();
 import TabsController from "../controllers/tabs";
-const { createTabs, getAll, deleteTab } = TabsController;
+const { createTabs, getAll, deleteTab, editTab } = TabsController;
 
 router.post("/tabs", createTabs);
 router.get("/tabs", getAll);

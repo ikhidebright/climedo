@@ -91,4 +91,26 @@ export default class TabsController {
       next(error);
     }
   }
+  static async editTab(request, response, next) {
+    try {
+      const { tabId } = request.params;
+      const result = await tabsSchema.validateAsync(request.body);
+      const tabExist = await Tabs.findOne({ _id: tabId });
+      if (!tabExist) {
+        throw createError.BadRequest(`Tab doesn't exist`);
+      }
+      const data = await Tabs.findOneAndUpdate(
+        { _id: tabId },
+        { $set: result },
+        { new: true }
+      );
+      return response.status(200).json({
+        success: true,
+        message: "Tab edited successfully",
+        data,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
