@@ -113,4 +113,16 @@ export default class TabsController {
       next(error);
     }
   }
+  static async getTabStats(request, response, next) {
+    try {
+      const data = await Tabs.aggregate([
+        {
+          $project: { datapointCount: { $size: "$dataPoints" } },
+        },
+      ]);
+      return response.status(200).send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

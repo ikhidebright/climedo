@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const tabs = new Schema({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   description: { type: String, required: true },
   dataPoints: { type: Array, required: true },
   CreatedDate: { type: Date, default: Date.now },
